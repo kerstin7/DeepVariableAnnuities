@@ -1,11 +1,9 @@
-# Damit der Code läuft, muss die PATH Variable angepasst werden, außerdem muss in dem entsprechendem Verzeichnis
-# eine Datei 'output.txt' existieren.
+# Damit der Code läuft, muss die PATH Variable angepasst werden.
 
 import numpy as np
 from matplotlib import pyplot as plt
 import seaborn as sns
 import torch
-#from torch import nn
 from tqdm import tqdm
 import pandas as pd
 import time
@@ -90,7 +88,7 @@ ttm_val = torch.from_numpy(np.ones(
 data_val_t = torch.stack((stock_val, survival_val, ttm_val), dim=2).float()
 
 
-# Calculate Price at t=0 
+# Calculate Price at t=0
 if normalize_survival:
     pi_ins = np.exp(-T*(1/average_age))*black_scholes(s0, K, T, r, sigma)
 else:
@@ -100,11 +98,13 @@ else:
 ## loss function ##############################################################
 ###############################################################################
 
+
 def loss_fn(hedge, stock, n):
     return torch.mean((profit(hedge, stock) + pi_ins - n * torch.maximum(stock[:, -1]-K, torch.zeros_like(stock[:, -1])))**2)
 
 ## Analytic Hedge #############################################################
 ###############################################################################
+
 
 test_size = 5000
 

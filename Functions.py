@@ -1,12 +1,6 @@
 from scipy.stats import norm
 import numpy as np
-#from matplotlib import pyplot as plt
-#import seaborn as sns
 import torch
-#from torch import nn
-#from tqdm import tqdm
-#import pandas as pd
-#import time
 
 
 def generate_stock_prices(batchsize, discretization_steps, delta_T, drift, sigma, T, s0):
